@@ -15,8 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-        
+          fetch-depth: 0        
 
       - name: Get active Epic branches
         id: get_active_epic_branches
@@ -67,6 +66,9 @@ jobs:
                 echo "Script log: Merge successful, pushing changes"
                 git push origin $TEMP_EPIC_BRANCH
                 echo "Script log: Pushed changes to branch: $TEMP_EPIC_BRANCH"
+                git checkout $ACTIVE_EPIC_BRANCH
+                git merge $TEMP_EPIC_BRANCH
+                echo "Script log: Merged changes to branch: $ACTIVE_EPIC_BRANCH"
               else
                 echo "Script log: Merge conflict detected, aborting merge"
                 git merge --abort
