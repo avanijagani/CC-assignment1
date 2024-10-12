@@ -66,6 +66,7 @@ jobs:
                 echo "Script log: Merge successful, pushing changes"
                 git push origin $TEMP_EPIC_BRANCH
                 echo "Script log: Pushed changes to branch: $TEMP_EPIC_BRANCH"
+                git pull origin $TEMP_EPIC_BRANCH
                 git checkout $ACTIVE_EPIC_BRANCH
                 git pull origin $ACTIVE_EPIC_BRANCH
                 git merge $TEMP_EPIC_BRANCH
