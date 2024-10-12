@@ -67,8 +67,11 @@ jobs:
                 git push origin $TEMP_EPIC_BRANCH
                 echo "Script log: Pushed changes to branch: $TEMP_EPIC_BRANCH"
                 git pull origin $TEMP_EPIC_BRANCH
+                echo "Script log: Pulled changes from branch: $TEMP_EPIC_BRANCH"
                 git checkout $ACTIVE_EPIC_BRANCH
+                echo "Script log: Checked out branch: $ACTIVE_EPIC_BRANCH"
                 git pull origin $ACTIVE_EPIC_BRANCH
+                echo "Script log: Pulled changes from branch: $ACTIVE_EPIC_BRANCH"
                 git merge $TEMP_EPIC_BRANCH
                 echo "Script log: Merged changes to branch: $ACTIVE_EPIC_BRANCH"
                 git push origin $ACTIVE_EPIC_BRANCH
