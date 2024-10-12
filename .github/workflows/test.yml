@@ -69,6 +69,7 @@ jobs:
                 git checkout $ACTIVE_EPIC_BRANCH
                 git merge $TEMP_EPIC_BRANCH
                 echo "Script log: Merged changes to branch: $ACTIVE_EPIC_BRANCH"
+                git push origin $ACTIVE_EPIC_BRANCH
               else
                 echo "Script log: Merge conflict detected, aborting merge"
                 git merge --abort
