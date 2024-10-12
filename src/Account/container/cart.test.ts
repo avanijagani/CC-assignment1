@@ -17,6 +17,9 @@ import { injectQuantityToMessage } from '../../../content/Cart.content';
 
 // Test comment
 // This test file is for testing the quantityMessageHandler function
+// This function is responsible for returning the correct alert message for the cart item
+// based on the item's availability, stock level, and other conditions
+// The function should return null if the item is available and in stock
 
 const mockCartProductTileContent = mockProductItemContent.productTiles;
 const cartEntry = mockCartContext.allEntries[0]!;
