@@ -63,7 +63,7 @@ jobs:
               git push --set-upstream origin $TEMP_EPIC_BRANCH
               echo "Script log: Created temp branch: $TEMP_EPIC_BRANCH"
 
-              if git merge main; then
+              if git merge origin/main; then
                 echo "Script log: Merge successful, pushing changes"
                 git push origin $TEMP_EPIC_BRANCH
                 echo "Script log: Pushed changes to branch: $TEMP_EPIC_BRANCH"
