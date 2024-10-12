@@ -58,7 +58,7 @@ jobs:
             else
               echo "Script log: Changes detected"
               TEMP_EPIC_BRANCH=$(echo "$ACTIVE_EPIC_BRANCH" | sed 's|^feature/main/|feature/|' | sed 's|$|-sync-with-main|')
-              git checkout -b $TEMP_EPIC_BRANCH $ACTIVE_EPIC_BRANCH
+              git checkout -b $TEMP_EPIC_BRANCH origin/$ACTIVE_EPIC_BRANCH
               echo "Script log: Checked out new branch: $TEMP_EPIC_BRANCH"
               git push --set-upstream origin $TEMP_EPIC_BRANCH
               echo "Script log: Created temp branch: $TEMP_EPIC_BRANCH"
