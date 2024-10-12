@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box, Stack, Button, Divider } from "@mui/material";
 
-
+// Test comment
 function LoginButtons(props) {
     let { handleLogin, handleSignUp } = props;
 
