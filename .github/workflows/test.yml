@@ -20,7 +20,7 @@ jobs:
       - name: Get active Epic branches
         id: get_active_epic_branches
         run: |
-          git fetch origin
+          git fetch --all
           current_date=$(date +%s)
           one_week_ago=$(date -d '1 week ago' +%s)
 
@@ -40,6 +40,12 @@ jobs:
           echo "active_branches=${branches[@]}" >> $GITHUB_OUTPUT
         shell: bash
 
+      - name: Get latest changes from main
+        run: |
+          git checkout main
+          git pull origin main
+          echo "Script log: Pulled latest changes from main"
+
       - name: Create PRs for active epic branches
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,18 +57,21 @@ jobs:
           for branch in "${ACTIVE_EPIC_BRANCH[@]}"; do
             echo "Script log: Processing epic branch: $branch"
             ACTIVE_EPIC_BRANCH=${branch#origin/}
+            git checkout $ACTIVE_EPIC_BRANCH
+            git pull origin $ACTIVE_EPIC_BRANCH
+            echo "Script log: Pulled latest changes from branch: $ACTIVE_EPIC_BRANCH"
 
             if git diff --quiet main $ACTIVE_EPIC_BRANCH; then
               echo "Script log: No changes detected, skipping merge"
             else
               echo "Script log: Changes detected"
               TEMP_EPIC_BRANCH=$(echo "$ACTIVE_EPIC_BRANCH" | sed 's|^feature/main/|feature/|' | sed 's|$|-sync-with-main|')
-              git checkout -b $TEMP_EPIC_BRANCH origin/$ACTIVE_EPIC_BRANCH
+              git checkout -b $TEMP_EPIC_BRANCH
               echo "Script log: Checked out new branch: $TEMP_EPIC_BRANCH"
               git push --set-upstream origin $TEMP_EPIC_BRANCH
               echo "Script log: Created temp branch: $TEMP_EPIC_BRANCH"
 
-              if git merge origin/main; then
+              if git merge main; then
                 echo "Script log: Merge successful, pushing changes"
                 git push origin $TEMP_EPIC_BRANCH
                 echo "Script log: Pushed changes to branch: $TEMP_EPIC_BRANCH"
