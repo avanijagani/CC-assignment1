@@ -24,12 +24,12 @@ jobs:
         run: | 
           echo "Finding all branches created by the bot..."
           BOT_BRANCHES=$(git branch -r | grep -E 'origin/feature/.*-sync-with-main-created-by-bot')
-          if [ -z "$BOT_BRANCHES" ]; then
-            echo "No bot-created branches found."
-          else
+          if [ -n "$BOT_BRANCHES" ]; then
             echo "Bot-created branches found:"
             echo "$BOT_BRANCHES"
-          fi             
+          else
+            echo "No bot-created branches found."
+          fi          
 
       - name: Get active Epic branches
         id: get_active_epic_branches
