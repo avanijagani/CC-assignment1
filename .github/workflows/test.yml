@@ -22,15 +22,15 @@ jobs:
 
       - name: Delete bot-created branches
         run: | 
-          echo "Finding all branches created by the bot..."
+          echo "Script log: Finding all branches created by the bot..."
           if [ -z $(git branch -r | grep -E 'origin/feature/.*-sync-with-main-created-by-bot')]; then
-            echo "No bot-created branches found."
+            echo "Script log: No bot-created branches found."
           else
-            echo "Bot-created branches found:"
+            echo "Script log: Bot-created branches found:"
             BOT_BRANCHES=$(git branch -r | grep -E 'origin/feature/.*-sync-with-main-created-by-bot')
-            echo "$BOT_BRANCHES"
+            echo "Script log: $BOT_BRANCHES"
             for branch in $BOT_BRANCHES; do
-              echo "Deleting branch: $branch"
+              echo "Script log: Deleting branch: $branch"
               BRANCH_TO_DELETE=${branch#origin/}
               git push origin --delete $BRANCH_TO_DELETE
             done
