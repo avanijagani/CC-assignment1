@@ -23,7 +23,7 @@ jobs:
       - name: Delete bot-created branches
         run: | 
           echo "Finding all branches created by the bot..."
-          BOT_BRANCHES=$(git branch -r | grep -E 'origin/feature/.*-sync-with-main')
+          BOT_BRANCHES=$(git branch -r | grep -E 'origin/feature/.*-sync-with-main-created-by-bot')
           if [ -z "$BOT_BRANCHES" ]; then
             echo "No bot-created branches found."
           else
