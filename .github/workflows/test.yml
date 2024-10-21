@@ -24,6 +24,7 @@ jobs:
         run: | 
           echo "Finding all branches created by the bot..."
           BOT_BRANCHES=$(git branch -r | grep -E 'origin/feature/.*-sync-with-main-created-by-bot')
+          echo "Bot-created branches"
           if [ -z "$BOT_BRANCHES" ]; then
             echo "No bot-created branches found."
           else
