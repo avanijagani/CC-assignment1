@@ -29,6 +29,10 @@ jobs:
             echo "Bot-created branches found:"
             BOT_BRANCHES=$(git branch -r | grep -E 'origin/feature/.*-sync-with-main-created-by-bot')
             echo "$BOT_BRANCHES"
+            for branch in $BOT_BRANCHES; do
+              echo "Deleting branch: $branch"
+              git push origin --delete $branch
+            done
           fi          
 
       - name: Get active Epic branches
