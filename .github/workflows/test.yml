@@ -31,7 +31,8 @@ jobs:
             echo "$BOT_BRANCHES"
             for branch in $BOT_BRANCHES; do
               echo "Deleting branch: $branch"
-              git push origin --delete $branch
+              BRANCH_TO_DELETE=${branch#origin/}
+              git push origin --delete $BRANCH_TO_DELETE
             done
           fi          
 
